@@ -22,9 +22,6 @@ mix.styles([
    'public/asset/styles/comun.css'
 ], 'public/css/all.css');
 
-
-
-
 mix.scripts([
    'public/asset/plugins/greensock/TweenMax.min.js',
    'public/asset/plugins/greensock/TimelineMax.min.js',

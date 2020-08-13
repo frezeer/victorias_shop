@@ -20,14 +20,15 @@
 
 <link rel="stylesheet" type="text/css" href="{{ asset('asset/plugins/font-awesome-4.7.0/css/font-awesome.min.css') }}">
 
-<link rel="stylesheet" type="text/css" href="{{ asset('asset/styles/main_styles.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('asset/styles/responsive.css') }}">
+@yield('estilos')
+
 
 
 
 </head>
 <body>
 
+<div id="app">
 <!-- Menu -->
 
 <div class="menu">
@@ -218,6 +219,6 @@
 	<script src="{{ asset('js/app.js') }}" defer></script>
 	<!-- Scripts -->
 	<script src="{{ asset('js/all.js') }}" defer></script>
-
+	</div>
 </body>
 </html>
