@@ -1,0 +1,108 @@
+cd C:\Proyectocore\laravel 6
+
+composer create-project laravel/laravel cms
+
+composer create-project --prefer-dist laravel/laravel blog "5.8.*"  
+
+composer create-project --prefer-dist laravel/laravel blog "5.6.*"
+
+composer create-project --prefer-dist laravel/laravel blog "5.5.*"
+
+
+------------------------------------------------------------------------
+
+laravel new blog 			 instala la ultima version
+
+composer require laravel/ui "^2.0" --dev instala el sistema de autenticacion	
+
+instala una version requerida o en especifico
+
+composer create-project --prefer-dist laravel/laravel blog "6.*"
+
+php artisan --version
+
+composer require laravel/ui "^1.0" --dev
+
+php artisan ui vue --auth
+
+npm install && npm run dev
+
+configurar conexion de base de datos en archivo .env
+
+root
+password
+
+mysql -u root -p 
+
+create database shop
+
+php artisan migrate
+
+php artisan make:model Category -m
+
+php artisan tinker
+
+$cat = new Category();
+$cat->nombre = 'Hombres'
+$cat->slug='hombres';
+$cat->descripcion = 'Ropa para Hombres'
+$cat->save();
+
+php artisan migrate:refresh  #hace un rollback de todas las tablas y despues hace la importación de las mismas
+
+
+$cat = Category::first();
+
+=> App\Category {#3843
+     id: 1,
+     nombre: "hombres",
+     slug: "hombres",
+     descripcion: "Ropa para hombres",
+     created_at: "2020-08-11 05:50:07",
+     updated_at: "2020-08-11 05:50:07",
+   }
+
+php artisan make:model Product -m
+
+
+
+Crea el controlador en una carpeta en especifica y con funciones listas para manejar el cotrolador
+
+
+php artisan make:controller API/CategoryController --api
+
+
+
+-------------------------------------------------------------------------
+.\vendor\bin\upgrade-carbon
+
+
+dentro de composer.json => dentro de autoload
+
+"files":[
+   "app/Http/Functions.php"
+]
+
+composer dump-autoload
+
+composer require guzzlehttp/guzzle
+
+composer require laravel/socialite
+
+php artisan make:controller ConnectController
+
+php artisan app:name cms
+
+php artisan --version 
+
+
+"laravel/framework": "5.8.*",
+
+Instalen ésta extension ( Laravel Blade Snippets )que ya viene con todo, emmet y Highlighting incluido
+
+1
+
+Mauricio Developer
+
+
+
