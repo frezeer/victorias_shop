@@ -13,6 +13,7 @@
 use App\Category;
 use App\Product;
 //use App\Category;
+
 Route::get('/', function () {
 
 // $cat = new Category();
@@ -66,13 +67,15 @@ Route::get('/', function () {
 
 
 Route::get('/administracion', function () {
-    return view('plantillas.admin');
+   $total = Category::count(); return view('plantillas.admin',compact('total'));
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/admin', function () {return view('plantillas.admin'); })->name('admin');
+
+Route::get('/admin', function () { $total = Category::count(); return view('plantillas.admin',compact('total')); })->name('admin');
+
 Route::resource('admin/category','Admin\AdminCategoryController')->names('admin.category');
 
 Route::get('cancelar/{ruta}', function ($ruta) {return redirect()->route($ruta)->with('cancelar','Acción Cancelada!'); })->name('cancelar');

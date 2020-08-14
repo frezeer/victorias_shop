@@ -30,12 +30,15 @@
         <div class="card-body">
                 <div class="form-group">                    
                     <label  for="nombre">Nombre</label>
+                    
                     <input v-model="nombre"
                     @blur= "getCategory"
                     @focus="div_aparecer=false"
-                    class="form-control" type="text" name="nombre" id="nombre" placeholder="Escribe el nombre de una categoria">
+                    class="form-control" type="text" name="nombre" id="nombre" placeholder="Escribe el nombre de una categoria" value="{{ old('nombre') }}">
+
                     <label for="slug">Slug</label>
-                    <input readonly v-model="generarSlug" class="form-control" type="text" name="slug" id="slug">
+                    <input readonly v-model="generarSlug" class="form-control" type="text" name="slug" id="slug"
+                    value="{{ old('slug') }}">
                     
                     <div v-if="div_aparecer" v-bind:class="div_clase_slug">
                       @{{ div_mensajeslug }}
@@ -44,7 +47,7 @@
                     <br v-if="div_aparecer">
 
                     <label for="descripcion">Descripcion</label>
-                    <textarea class="form-control" name="descripcion" id="descripcion" cols="30" row="5"></textarea>
+                    <textarea class="form-control" name="descripcion" id="descripcion" cols="30" row="5">{{ old('descripcion') }}</textarea>
                 </div>
             
             <br />

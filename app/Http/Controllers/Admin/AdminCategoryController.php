@@ -7,6 +7,15 @@ use App\Category;
 
 class AdminCategoryController extends Controller
 {
+    /*
+        Middleware para proteger el acceso 
+        a usuarios no autentcados
+    */
+    public function __construct(){
+         
+        $this->middleware('auth');
+    
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +26,8 @@ class AdminCategoryController extends Controller
         $nombre = $request->get('nombre');
         $total = Category::count();
         $categorias = Category::where('nombre','like',"%$nombre%")->orderBy('nombre')->paginate(5);
-        return view('admin.category.index',compact('categorias','total'));
+        
+            return view('admin.category.index',compact('categorias','total'));
 
          //$categorias = Category::orderBy('nombre','asc')->paginate(5);   
          //$categorias = Category::all();
@@ -35,7 +45,8 @@ class AdminCategoryController extends Controller
 
      public function create(Request $request)
     {
-        return view('admin.category.create');
+        $total = Category::count(); 
+        return view('admin.category.create',compact('total'));
     }
 
     /**
@@ -44,9 +55,16 @@ class AdminCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
         //return Category::create($request->all());
+
+           $request->validate([
+            'nombre'      => 'required|max:50|unique:categories,nombre',
+            'slug'        =>  'required|max:2|unique:categories,slug',  
+            'descripcion' => 'required|max:2' ]);
+
         Category::create($request->all());
         return redirect()->route('admin.category.index')->with('datos','Registro crado correctamente');   
     }
@@ -61,7 +79,8 @@ class AdminCategoryController extends Controller
     {
           $cat = Category::where('slug',$slug)->firstOrFail();
           $editar = 'Si';
-          return view('admin.category.show',compact('cat','editar'));
+          $total = Category::count();
+          return view('admin.category.show',compact('cat','editar','total'));
     }
 
     /**
@@ -73,8 +92,9 @@ class AdminCategoryController extends Controller
     public function edit($slug)
     {
           $cat = Category::where('slug',$slug)->firstOrFail();
+          $total = Category::count();
           $editar = 'Si';
-          return view('admin.category.edit',compact('cat','editar'));
+          return view('admin.category.edit',compact('cat','editar','total'));
     }
 
     /**
@@ -88,6 +108,13 @@ class AdminCategoryController extends Controller
      public function update(Request $request, $id)
     {
         $cat = Category::findOrFail($id);
+        
+        $request->validate([
+            'nombre'      => 'required|max:50|unique:categories,nombre,'.$cat->id,
+            'slug'        => 'required|max:50|unique:categories,slug,'.$cat->id,  
+            'descripcion' => 'required|max:50,'.$cat->id 
+        ]);
+
         $cat->fill($request->all())->save();
         //return $cat;
         return redirect()->route('admin.category.index')->with('datos','Registro editado correctamente');

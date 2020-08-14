@@ -41,11 +41,11 @@
                     @focus="div_aparecer=false"
                     
                     class="form-control" type="text" name="nombre" id="nombre" placeholder="Escribe el nombre de una categoria" 
-                    value="{{ $cat->nombre }}">
+                    value="{{ old('name',$cat->nombre) }}">
                     
                     <label for="slug">Slug</label>
                     <input readonly v-model="generarSlug" class="form-control" type="text" name="slug" id="slug"
-                    value="{{ $cat->slug }}">
+                    value="{{ old('slug',$cat->slug) }}">
 
                     <div v-if="div_aparecer" v-bind:class="div_clase_slug">
                       @{{ div_mensajeslug }}
@@ -54,7 +54,7 @@
                     <br v-if="div_aparecer">
 
                     <label for="descripcion">Descripcion</label>
-                    <textarea class="form-control" name="descripcion" id="descripcion" cols="30" row="5">{{ $cat->descripcion }}</textarea>
+                    <textarea class="form-control" name="descripcion" id="descripcion" cols="30" row="5">{{ old('descripcion',$cat->descripcion) }}</textarea>
                 </div>
             
             <br />
