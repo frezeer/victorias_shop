@@ -49914,6 +49914,10 @@ if (document.getElementById('apicategory')) {
 
 if (document.getElementById('confirmareliminar')) {
   __webpack_require__(/*! ./confirmareliminar */ "./resources/js/confirmareliminar.js");
+}
+
+if (document.getElementById('apiproduct')) {
+  __webpack_require__(/*! ./productos/apiProductos */ "./resources/js/productos/apiProductos.js");
 } //manda a llamar el archivo js
 
 /***/ }),
@@ -49936,6 +49940,88 @@ var confirmareliminar = new Vue({
       this.urlaeliminar = document.getElementById('urlbase').innerHTML + '/' + id; //alert(this.urlaeliminar)
 
       $('#modalEliminar').modal('show');
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/productos/apiProductos.js":
+/*!************************************************!*\
+  !*** ./resources/js/productos/apiProductos.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var apiproduct = new Vue({
+  el: '#apiproduct',
+  data: {
+    nombre: '',
+    slug: '',
+    div_mensajeslug: 'Slug Existente',
+    div_clase_slug: 'badge badge-danger',
+    div_aparecer: false,
+    deshabilitar_boton: 1
+  },
+  computed: {
+    generarSlug: function generarSlug() {
+      var _char = {
+        "á": "a",
+        "é": "e",
+        "í": "i",
+        "ó": "o",
+        "ú": "u",
+        "Á": "A",
+        "É": "E",
+        "Í": "I",
+        "Ó": "O",
+        "Ú": "U",
+        "ñ": "n",
+        "Ñ": "N",
+        " ": "-",
+        "_": "-"
+      };
+      var expr = /[áéíóúÁÉÍÓÚÑñ_ ]/g;
+      this.slug = this.nombre.trim().replace(expr, function (e) {
+        return _char[e];
+      }).toLowerCase(); // console.log(this.slug);
+
+      return this.slug; //return this.nombre.trim().replace(/ /g,'-').toLowerCase();   
+    }
+  },
+  methods: {
+    getCategory: function getCategory() {
+      var _this = this;
+
+      if (this.slug) {
+        var url = '/api/product/' + this.slug;
+        axios.get(url).then(function (response) {
+          _this.div_mensajeslug = response.data;
+          console.log(_this.div_mensajeslug);
+
+          if (_this.div_mensajeslug === "Slug Disponible") {
+            _this.div_clase_slug = 'badge badge-success';
+            _this.deshabilitar_boton = 0;
+          } else {
+            _this.div_clase_slug = 'badge badge-danger';
+            _this.deshabilitar_boton = 1;
+          }
+
+          _this.div_aparecer = true;
+        });
+      } else {
+        this.div_mensajeslug = "Debes Registrar una Categoria";
+        this.div_clase_slug = 'badge badge-danger';
+        this.deshabilitar_boton = 1;
+        this.div_aparecer = true;
+      }
+    }
+  },
+  mounted: function mounted() {
+    if (document.getElementById('editar')) {
+      this.nombre = document.getElementById('nombretemp').innerHTML; //console.log(this.nombre);
+
+      this.deshabilitar_boton = 0;
     }
   }
 });

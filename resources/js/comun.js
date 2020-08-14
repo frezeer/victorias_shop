@@ -1,4 +1,3 @@
-
 window.Vue = require('vue');
 
 /**
@@ -34,7 +33,9 @@ if(document.getElementById('apicategory')){
      require('./confirmareliminar');
  }
 
-
+if(document.getElementById('apiproduct')){
+     require('./productos/apiProductos');
+ }
 
 //manda a llamar el archivo js 
  

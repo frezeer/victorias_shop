@@ -31,6 +31,20 @@ Route::get('/', function () {
 // return $cat;
 
 // $prod = new Product();
+// $prod->nombre = "Producto 1";
+// $prod->slug   = "Producto 1";
+// $prod->category_id = 1;
+// $prod->descripcion_corta = "Producto";
+// $prod->descripcion_larga = "Producto";
+// $prod->especificaciones = "Producto";
+// $prod->datos_interes = "Producto";
+// $prod->estado = "Nuevo";
+// $prod->activo = "Si";
+// $prod->slideprincipal ="No";
+// $prod->save();
+// return $prod;
+
+// $prod = new Product();
 // $prod->nombre = "Producto 2";
 // $prod->slug   = "Producto 2";
 // $prod->category_id = 2;
@@ -77,6 +91,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin', function () { $total = Category::count(); return view('plantillas.admin',compact('total')); })->name('admin');
 
 Route::resource('admin/category','Admin\AdminCategoryController')->names('admin.category');
+
+Route::resource('admin/product' ,'Admin\AdminProductController')->names('admin.product');
 
 Route::get('cancelar/{ruta}', function ($ruta) {return redirect()->route($ruta)->with('cancelar','Acción Cancelada!'); })->name('cancelar');
 

@@ -431,15 +431,12 @@
 
 
 <!-- Lo mas visto -->
-
-
 <div class="lomasvendidocontenedor">
 <div class="section_title text-center">Lo mas Visto</div>	
 <br> 	 
     <div class="lomasvendido owl-carousel owl-theme">
 
             <!-- item-->
-
             <div class="">
                     <div class="product">
                         <div class="product_image"><img src="http://localhost:8000/asset/images/product_5.jpg" alt=""></div>
@@ -568,12 +565,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
-
-
-
                 </div>
     
             </div>		
