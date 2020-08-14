@@ -12,7 +12,55 @@
 
 use App\Category;
 use App\Product;
-//use App\Category;
+use App\Image;
+
+
+
+//http://localhost:8000/saveusuario
+Route::get('/saveusuario', function () {
+
+   $imagen = new App\Image(['url' => 'imagenes/113.jpg']);
+
+   $usuario = App\User::find(1);
+
+   $usuario->image()->save($imagen);
+
+   return $usuario;
+}); 
+
+//http://localhost:8000/getusuarios
+//para hacer la prueba con Imagenes
+Route::get('/getusuario', function () {
+   
+   //$usuario = App\User::orderBy('id','desc')->get();
+   $usuario = App\User::find(1);
+
+   $image = $usuario->image;
+   
+   if($image){
+      echo "Tiene imagen";
+   }else{
+      echo "No tiene imagen";
+   }
+   return $image;
+
+   });
+
+
+//muestrame todos los usuarios
+Route::get('/getusuarios', function () {
+    $image = App\Image::orderBy('id','desc')->get();
+    return $image;
+});
+
+
+//muestrame todos los usuarios
+Route::get('/returnusuario', function () {
+    //$image = App\Image::orderBy('id','desc')->get();
+    $usuario = App\User::find(1);
+    return $usuario->image;
+});
+
 
 Route::get('/', function () {
 
