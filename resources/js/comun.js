@@ -34,7 +34,7 @@ if(document.getElementById('apicategory')){
  }
 
 if(document.getElementById('apiproduct')){
-     require('./productos/apiProductos');
+     require('./admin/apiProduct');
  }
 
 //manda a llamar el archivo js 

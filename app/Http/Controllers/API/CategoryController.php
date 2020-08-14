@@ -16,12 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
         /*
-        $cat = new Category();
-        $cat->nombre = "Mujer";
-        $cat->slug = "mujer";
-        $cat->descripcion= "Ropa de Mujer";
-        $cat->save();
-        return $cat;         
+        
         */
         return Category::all();
     }

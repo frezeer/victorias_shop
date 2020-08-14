@@ -20,14 +20,14 @@ const apiproduct = new Vue({
                     this.slug = this.nombre.trim().replace(expr, function(e){
                         return char[e]; 
                     }).toLowerCase();
-                    // console.log(this.slug);
+                    
                     return this.slug;
-                    //return this.nombre.trim().replace(/ /g,'-').toLowerCase();   
+                     
                 }
             },
             methods:
             {
-                getCategory(){
+                getProduct(){
                     if(this.slug){
                     let url = '/api/product/'+this.slug;
                     axios.get(url).then(response => {
@@ -43,7 +43,7 @@ const apiproduct = new Vue({
                          this.div_aparecer = true;
                     });
                     }else{
-                    this.div_mensajeslug ="Debes Registrar una Categoria";
+                    this.div_mensajeslug ="Debes Escribir un Producto";
                     this.div_clase_slug = 'badge badge-danger';
                     this.deshabilitar_boton = 1;
                     this.div_aparecer = true;

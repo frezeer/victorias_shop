@@ -30,10 +30,11 @@ Route::get('/', function () {
 // $cat->save();
 // return $cat;
 
-// $prod = new Product();
-// $prod->nombre = "Producto 1";
-// $prod->slug   = "Producto 1";
-// $prod->category_id = 1;
+ //$prod = new Product();
+ //$prod->findOrFail(1);
+ //$prod->nombre ="Producto 1";
+ //$prod->slug   = "producto-1";
+ //$prod->category_id = 1;
 // $prod->descripcion_corta = "Producto";
 // $prod->descripcion_larga = "Producto";
 // $prod->especificaciones = "Producto";
@@ -41,7 +42,7 @@ Route::get('/', function () {
 // $prod->estado = "Nuevo";
 // $prod->activo = "Si";
 // $prod->slideprincipal ="No";
-// $prod->save();
+ //$prod->save();
 // return $prod;
 
 // $prod = new Product();

@@ -51,12 +51,44 @@ class AdminProductController extends Controller
     public function store(Request $request)
     {
          $request->validate([
-            'nombre'      => 'required|max:50|unique:categories,nombre',
-            'slug'        =>  'required|max:2|unique:categories,slug',  
-            'descripcion' => 'required|max:2' ]);
+            'nombre'      =>       'required|max:50|unique:categories,nombre',
+            'slug'        =>       'required|max:50|unique:categories,slug',
+            'cantidad'    =>       'required',
+            'estado'       =>       'required',
+            'descripcion_corta' => 'required|max:20',
+            'descripcion_larga' => 'required|max:100',
+             ]);
 
-        Product::create($request->all());
-        return redirect()->route('admin.product.index')->with('datos','Producto creado correctamente');
+            $prod = new Product();            
+            $prod->nombre               = $request->nombre;
+            $prod->slug                 = $request->slug;
+            $prod->category_id          = $request->category_id;
+            $prod->cantidad             = $request->cantidad;
+            $prod->precio_actual        = $request->precio_actual;
+            $prod->porcentaje_descuento = $request->porcentaje_descuento;
+            $prod->descripcion_corta    = $request->descripcion_corta;
+            $prod->descripcion_larga    = $request->descripcion_larga;   
+            $prod->datos_interes        = $request->datos_interes;
+            $prod->especificaciones     = $request->especificaciones;
+            $prod->estado               = $request->estado;    
+            //$prod->activo               = $request->activo;
+            //$prod->slideprincipal       = $request->slideprincipal;
+
+            if($request->activo){
+                $prod->activo = "Si";
+            }else{
+                 $prod->activo = "No";
+            }  
+            
+             if($request->slideprincipal){
+                $prod->slideprincipal = "Si";
+            }else{
+                 $prod->slideprincipal = "No";
+            } 
+             $prod->save();
+
+            //return Product::create($request->all());
+            return redirect()->route('admin.product.index')->with('datos','Producto creado correctamente');
     }
 
     /**

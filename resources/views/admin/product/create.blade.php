@@ -9,6 +9,7 @@
 @endsection
 
 @section('contenido')
+<div id="apiproduct">
 
 <form action="{{ route('admin.product.store') }}" method="POST" enctype="multipart/form-data">
   @csrf
@@ -63,12 +64,21 @@
               <div class="form-group">
 
                 <label>Nombre</label>
-                <input class="form-control" type="text" id="nombre" name="nombre">
+              
+                <input v-model="nombre"
+                    @blur= "getProduct"
+                    @focus="div_aparecer=false"
+                    class="form-control" type="text" id="nombre" name="nombre">
 
                 <label>Slug</label>
-                <input class="form-control" type="text" id="slug" name="slug">
+                <input readonly v-model="generarSlug" 
+                class="form-control" type="text" id="slug" name="slug">
 
+                <div v-if="div_aparecer" v-bind:class="div_clase_slug">
+                      @{{ div_mensajeslug }}
+                    </div>
 
+                    <br v-if="div_aparecer">
               </div>
               <!-- /.form-group -->
 
@@ -88,7 +98,7 @@
                   @endforeach
                 </select>
                 <label>Cantidad</label>
-                <input class="form-control" type="number" id="cantidad" name="cantidad">
+                <input class="form-control" type="number" id="cantidad" name="cantidad" >
               </div>
               <!-- /.form-group -->
             </div>
@@ -122,7 +132,10 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">$</span>
                   </div>
-                  <input class="form-control" type="number" id="precioanterior" name="precioanterior" min="0" value="0" step=".01">
+                  <input class="form-control" 
+                  type="number" id="precioanterior" name="precio_anterior" min="0" value="0" step=".01"
+                  value={{ old('precio_anterior') }} >
+
                 </div>
               </div>
               <!-- /.form-group -->
@@ -137,7 +150,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">$</span>
                   </div>
-                  <input class="form-control" type="number" id="precioactual" name="precioactual" min="0" value="0" step=".01">
+                  <input class="form-control" type="number" id="precio_actual" name="precio_actual" min="0" value="0" step=".01" >
                 </div>
 
                 <br>
@@ -155,7 +168,7 @@
               <div class="form-group">
                 <label>Porcentaje de descuento</label>
                 <div class="input-group">
-                  <input class="form-control" type="number" id="porcentajededescuento" name="porcentajededescuento" step="any" min="0" min="100" value="0">
+                  <input class="form-control" type="number" id="porcentaje_descuento" name="porcentaje_descuento" step="any" min="0" min="100" value="0" >
                   <div class="input-group-prepend">
                     <span class="input-group-text">%</span>
                   </div>
@@ -191,7 +204,8 @@
               <div class="form-group">
                 <label>Descripción corta:</label>
 
-                <textarea class="form-control" name="descripcion_corta" id="descripcion_corta" rows="3"></textarea>
+                <textarea class="form-control" name="descripcion_corta" id="descripcion_corta" 
+                rows="3">{{ old('descripcion_corta') }}</textarea>
 
               </div>
               <!-- /.form group -->
@@ -199,7 +213,8 @@
               <div class="form-group">
                 <label>Descripción larga:</label>
 
-                <textarea class="form-control" name="descripcion_larga" id="descripcion_larga" rows="5"></textarea>
+                <textarea class="form-control" name="descripcion_larga" id="descripcion_larga"
+                 rows="5">{{ old('descripcion_larga') }}</textarea>
 
               </div>
 
@@ -224,7 +239,8 @@
               <div class="form-group">
                 <label>Especificaciones:</label>
 
-                <textarea class="form-control" name="especificaciones" id="especificaciones" rows="3"></textarea>
+                <textarea class="form-control" name="especificaciones" id="especificaciones" 
+                rows="3">{{ old('especificaciones') }}</textarea>
 
               </div>
               <!-- /.form group -->
@@ -232,7 +248,8 @@
               <div class="form-group">
                 <label>Datos de interes:</label>
 
-                <textarea class="form-control" name="datos_de_interes" id="datos_de_interes" rows="5"></textarea>
+                <textarea class="form-control" name="datos_interes" id="datos_interes" 
+                rows="5">{{ old('datos_interes') }}</textarea>
 
               </div>
 
@@ -312,8 +329,8 @@
 
               <div class="form-group">
                 <div class="custom-control custom-switch">
-                  <input type="checkbox" class="custom-control-input" id="sliderprincipal" name="sliderprincipal">
-                  <label class="custom-control-label" for="sliderprincipal">Aparece en el Slider principal</label>
+                  <input type="checkbox" class="custom-control-input" id="slideprincipal" name="slideprincipal">
+                  <label class="custom-control-label" for="slideprincipal">Aparece en el Slider principal</label>
                 </div>
               </div>
 
@@ -323,16 +340,15 @@
 
           </div>
           <!-- /.row -->
-
-
-
-
+          
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
 
                 <a class="btn btn-danger" href="{{ route('cancelar','admin.product.index') }}">Cancelar</a>
-                <input type="submit" value="Guardar" class="btn btn-primary">
+                <input
+                :disabled = "deshabilitar_boton==1" 
+                type="submit" value="Guardar" class="btn btn-primary">
 
               </div>
               <!-- /.form-group -->
@@ -355,5 +371,5 @@
   </section>
   <!-- /.content -->
 </form>
-
+</div>
 @endsection

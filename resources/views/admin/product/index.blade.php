@@ -6,7 +6,7 @@
 <li class="breadcrumb-item active">@yield('titulo')</li>
 @endsection
 @section('contenido')
-    {{ $productos }}
+    
     <!-- /.row -->
         <div id="confirmareliminar" class="row">
          <span id="urlbase" style="display:none;" >{{ route('admin.product.index') }}</span>
