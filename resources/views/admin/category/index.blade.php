@@ -1,6 +1,6 @@
 
 @extends('plantillas.admin')
-@section('titulo','Crear Categoria')
+@section('titulo','Listar Categoria')
 @section('contenido')
 
     <!-- /.row -->
