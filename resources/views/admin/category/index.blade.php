@@ -1,21 +1,32 @@
 
 @extends('plantillas.admin')
-@section('titulo','Listar Categoria')
+@section('titulo','Administracion de Categorias')
+@section('breadcrumb')
+<li class="breadcrumb-item"><a href="{{ route('admin') }}">Inicio</a></li>
+<li class="breadcrumb-item active">@yield('titulo')</li>
+@endsection
 @section('contenido')
 
     <!-- /.row -->
-        <div class="row">
+        <div id="confirmareliminar" class="row">
+         <span id="urlbase" style="display:none;" >{{ route('admin.category.index') }}</span>
+          @include('custom.modal_eliminar')
           <div class="col-12">
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Listado de Categorias</h3>
                 <div class="card-tools">
+                 
+                <form >                   
                   <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                    <input type="text" name="nombre" class="form-control float-right"
+                     placeholder="Buscar...." value="{{ request()->get('nombre') }}" >
                     <div class="input-group-append">
                       <button type="submit" class="btn btn-warning"><i class="fas fa-search"></i></button>
                     </div>
                   </div>
+                  </form>
+
                 </div>
               </div>
               <!-- /.card-header -->
@@ -60,15 +71,16 @@
                         </td>
                         <td>
                           <a class="btn btn-danger" 
-                          href="{{ route('admin.category.destroy',$categoria->id) }}">
-                          <i class="fas fa-trash"></i>
-                        </a>
+                            href="{{ route('admin.category.index') }}" 
+                            v-on:click.prevent="deseas_eliminar({{$categoria->id}})" >
+                            <i class="fas fa-trash"></i>
+                          </a>
                         </td>                    
                     </tr>
                     @endforeach
                   </tbody>
                 </table>
-                {{ $categorias->links() }}
+                {{ $categorias->appends($_GET)->links() }}
               </div>
               <!-- /.card-body -->
             </div>

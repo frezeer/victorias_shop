@@ -3,6 +3,12 @@
 
      @section('titulo','Mostrar Categoria')
 
+     @section('breadcrumb')
+      <li class="breadcrumb-item"><a href="{{ route('admin.category.index') }}">Categorias</a></li>
+      <li class="breadcrumb-item active">@yield('titulo')</li>
+     @endsection
+
+
      @section('contenido')
 
       <div id="apicategory">
@@ -69,7 +75,7 @@
           <a class="btn btn-danger" href="{{ route('cancelar','admin.category.index') }}">Cancelar</a>
 
                 
-          <a class="btn btn-success float-right" 
+          <a class="btn btn-outline-success float-right" 
           href="{{ route('admin.category.edit',$cat->slug) }}" >Editar</a>
         
         </div>

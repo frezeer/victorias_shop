@@ -72,17 +72,9 @@ Route::get('/administracion', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-
-Route::get('/admin', function () {
-    return view('plantillas.admin');
-});
-
+Route::get('/admin', function () {return view('plantillas.admin'); })->name('admin');
 Route::resource('admin/category','Admin\AdminCategoryController')->names('admin.category');
 
-
-Route::get('cancelrar/{ruta}', function ($ruta) {
-    return redirect()->route($ruta)->with('cancelar','Acción Cancelada!');
-})->name('cancelar');
+Route::get('cancelar/{ruta}', function ($ruta) {return redirect()->route($ruta)->with('cancelar','Acción Cancelada!'); })->name('cancelar');
 
 

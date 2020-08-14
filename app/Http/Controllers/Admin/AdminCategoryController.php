@@ -12,15 +12,17 @@ class AdminCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-            //$categorias = Category::all();
-            //$product= Product::orderBy('created_at','desc')->get();
-            $categorias = Category::orderBy('nombre','asc')->paginate(5);
-            return view('admin.category.index',compact('categorias'));
+        $nombre = $request->get('nombre');
+        $categorias = Category::where('nombre','like',"%$nombre%")->orderBy('nombre')->paginate(5);
+        return view('admin.category.index',compact('categorias'));
 
-           // $categorias = Category::orderBy('nombre','DESC');
-          //return view('admin.category.edit',compact('cat','editar'));
+         //$categorias = Category::orderBy('nombre','asc')->paginate(5);   
+         //$categorias = Category::all();
+         //$product= Product::orderBy('created_at','desc')->get();
+         // $categorias = Category::orderBy('nombre','DESC');
+         //return view('admin.category.edit',compact('cat','editar'));
          //return view('admin.category.index')->with(compact('categorias'));
     }
 
@@ -97,7 +99,9 @@ class AdminCategoryController extends Controller
      */
     public function destroy($id)
     {
-        $cat = Category::find($id);
+        //$cat = Category::find($id);
+        $cat = Category::findOrFail($id);
         $cat->delete();
+        return redirect()->route('admin.category.index')->with('datos','Registro eliminado correctamente');
     }
 }

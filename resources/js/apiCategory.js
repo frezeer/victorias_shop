@@ -52,7 +52,7 @@ const apicategory = new Vue({
             },
             mounted()
             {
-                if(document.getElementById('editar').innerHTML)
+                if(document.getElementById('editar'))
                 {
                     this.nombre =  document.getElementById('nombretemp').innerHTML;
                     //console.log(this.nombre);
