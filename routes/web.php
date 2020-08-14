@@ -65,6 +65,18 @@ Route::get('/', function () {
 });
 
 
+Route::get('/administracion', function () {
+    return view('plantillas.admin');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::get('/admin', function () {
+    return view('plantillas.admin');
+});
+
+Route::resource('admin/category','Admin\AdminCategoryController')->names('admin.category');
+
