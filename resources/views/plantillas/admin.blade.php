@@ -168,6 +168,8 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+        
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview">
@@ -199,6 +201,40 @@
               </li>
             </ul>
           </li>
+
+          
+
+          <!-- Add icons to the links using the .nav-icon class
+           with font-awesome or any other icon font library -->
+          
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="fas fa-list-alt"></i>
+              <p>
+                Categorias&nbsp;({{ $total }})
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.category.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Listado de categorias</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.category.create') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Crear Categorias</p>
+                </a>             
+            </ul>
+          </li>
+
+
+
+
+
           <li class="nav-item">
             <a href="../widgets.html" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
@@ -735,8 +771,9 @@
               </button>
        </div>  
       @endif
-
-
+       <div> 
+          Total de Categorias : <strong>{{ $total }} </strong>
+       </div>
       @yield('contenido')
   
      </section>

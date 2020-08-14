@@ -15,8 +15,9 @@ class AdminCategoryController extends Controller
     public function index(Request $request)
     {
         $nombre = $request->get('nombre');
+        $total = Category::count();
         $categorias = Category::where('nombre','like',"%$nombre%")->orderBy('nombre')->paginate(5);
-        return view('admin.category.index',compact('categorias'));
+        return view('admin.category.index',compact('categorias','total'));
 
          //$categorias = Category::orderBy('nombre','asc')->paginate(5);   
          //$categorias = Category::all();
