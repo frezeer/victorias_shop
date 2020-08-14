@@ -38,7 +38,7 @@ class AdminProductController extends Controller
     {
         $total = Product::count();
         //$productos = Product::all(); 
-        $categorias = Category::all();
+        $categorias = Category::orderBy('nombre')->get();
         return view('admin.product.create',compact('categorias','total'));
     }
 
