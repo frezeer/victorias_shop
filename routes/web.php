@@ -86,9 +86,9 @@ Route::get('/productos-imagenes', function () {
 
 //me trae el producto con id 4 y sus imagenes
 ////http://localhost:8000/productos
-Route::get('/productos8', function () {
+Route::get('/productos10', function () {
 
-    $productos = App\Product::with('images')->find(8);
+    $productos = App\Product::with('images')->find(10);
       return $productos;
 });
 

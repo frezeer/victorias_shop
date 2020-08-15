@@ -59,7 +59,7 @@ class AdminProductController extends Controller
             'precio_actual' =>       'required',
             'cantidad'      =>       'required',
             'estado'        =>       'required',
-            'descripcion_corta' =>   'required|max:20',
+            'descripcion_corta' =>   'required|max:100',
             'descripcion_larga' =>   'required|max:100'
 
              ]);
@@ -145,12 +145,13 @@ class AdminProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function edit($slug)
     {
-          $productos = Product::where('slug',$slug)->firstOrFail();
+          $producto = Product::with('images','category')->where('slug',$slug)->firstOrFail();
+          $categorias = Category::orderBy('nombre')->get();
           $total = Product::count();
-          $editar = 'Si';
-          return view('admin.product.edit',compact('productos','editar','total'));
+          return view('admin.product.edit',compact('producto','total','categorias'));
     }
 
     /**

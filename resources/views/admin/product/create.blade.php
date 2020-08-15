@@ -8,7 +8,36 @@
 <li class="breadcrumb-item active">@yield('titulo')</li>
 @endsection
 
+@section('estilos')
+ <!-- Select2 -->
+<link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
+<link rel="stylesheet" href="/adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+@endsection
+
+@section('scripts')
+<!- Esta seccion va al final de la plantilla admin ---->
+<!-- Select2 -->
+<script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
+
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $('#category_id').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    });
+  }) 
+</script>
+@endsection
+
+
 <script src="/adminlte/ckeditor/ckeditor.js"></script>
+
+
+
+
 @section('contenido')
 <div id="apiproduct">
 
@@ -88,9 +117,8 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label>Categorias</label>
-                <select name="category_id" class="form-control select2" style="width: 100%;">
+                <select name="category_id" id="category_id" class="form-control" style="width: 100%;">
                   @foreach($categorias as $categoria)
-
                   @if ($loop->first)
                   <option value="{{ $categoria->id }}" selected="selected">{{ $categoria->nombre }}</option>
                   @else

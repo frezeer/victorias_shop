@@ -1,4 +1,3 @@
-
 @extends('plantillas.admin')
 @section('titulo','Administracion de productos')
 @section('breadcrumb')
