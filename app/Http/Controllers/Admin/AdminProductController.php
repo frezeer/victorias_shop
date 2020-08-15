@@ -23,10 +23,10 @@ class AdminProductController extends Controller
      */
     public function index(Request $request)
     {
-        $nombre = $request->get('nombre');
-        $total = Product::count();
-        $productos = Product::where('nombre','like',"%$nombre%")->orderBy('nombre')->paginate(2);
-         return view('admin.product.index',compact('productos','total'));
+     $nombre = $request->get('nombre');
+     $total = Product::count();
+     $productos = Product::with('images','category')->where('nombre','like',"%$nombre%")->orderBy('nombre')->paginate(5);
+     return view('admin.product.index',compact('productos','total'));
     }
 
     /**

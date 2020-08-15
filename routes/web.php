@@ -23,7 +23,7 @@ use App\Image;
 ////http://localhost:8000/productos-eliminar-imagen
 Route::get('/productos-eliminar-imagen/todos', function () {
 
-        $productos = App\Product::find(8);
+        $productos = App\Product::find(1);
            $productos->images()->delete();
             return $productos;
 });
@@ -86,9 +86,9 @@ Route::get('/productos-imagenes', function () {
 
 //me trae el producto con id 4 y sus imagenes
 ////http://localhost:8000/productos
-Route::get('/productos4', function () {
+Route::get('/productos8', function () {
 
-    $productos = App\Product::with('images')->find(4);
+    $productos = App\Product::with('images')->find(8);
       return $productos;
 });
 
@@ -231,13 +231,13 @@ Route::get('/createmanyusuarios', function () {
    //la imagen con URL salva al usuario con id 1
    $imagen = [];
 
-   $imagen[]['url'] = 'imagenes/113.jpg';
-   $imagen[]['url'] = 'imagenes/108.jpg';
-   $imagen[]['url'] = 'imagenes/181.jpg';
-   $imagen[]['url'] = 'imagenes/223.jpg';
-   $imagen[]['url'] = 'imagenes/255.jpg';
+   $imagen[]['url'] = '/imagenes/113.jpg';
+   $imagen[]['url'] = '/imagenes/108.jpg';
+   $imagen[]['url'] = '/imagenes/181.jpg';
+   $imagen[]['url'] = '/imagenes/223.jpg';
+   $imagen[]['url'] = '/imagenes/255.jpg';
 
-   $producto = App\Product::find(4);
+   $producto = App\Product::find(5);
 
    $producto->images()->createMany($imagen);
 

@@ -6,7 +6,25 @@
 <li class="breadcrumb-item active">@yield('titulo')</li>
 @endsection
 @section('contenido')
-    
+<style type="text/css" >
+  
+  .table1
+  {
+    width: 100%;
+    margin-bottom: 1rem;
+    color:#212529;
+    text-align: center;
+  }
+
+  .table1 td, .table1 th {
+    padding:.75rem;
+    vertical-align: center;
+    border-top:1px solid #dee2e6;
+  }
+
+</style> 
+ 
+
     <!-- /.row -->
         <div id="confirmareliminar" class="row">
          <span id="urlbase" style="display:none;" >{{ route('admin.product.index') }}</span>
@@ -32,16 +50,15 @@
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0" style="height: 300px;">
               <a class="m2 float-right btn btn-primary" href="{{ route('admin.product.create') }}">Nuevo producto</a>
-                <table class="table table-head-fixed">
+                <table class="table1 table-head-fixed">
                   <thead>
                     <tr>
                       <th>ID</th>
-                      <th>Nombre producto</th>
-                      <th>Slug</th>
-                      
-                      <th>cantidad</th>
-                      <th>precio_actual</th>
-                      <th>Descripcion</th>
+                      <th>Imagen</th>
+                      <th>Nombre</th>
+                      <th>Estado</th>
+                      <th>Activo</th>
+                      <th>Slide Principal</th>
                       <th colspan="3"></th>
                     </tr>
                   </thead>
@@ -50,13 +67,18 @@
                       @foreach ($productos as $producto)
                     <tr>
                       <td>{{ $producto->id }}</td>
+                      <td> 
+                        @if ( $producto->loadCount('images')->images_count <=0 )
+                          <img style="height: 70px; width: 70px; " src="/imagenes/images.jpg"  
+                          class="rounded-circle" />
+                        @else 
+                          <img style="height: 70px; width: 70px; " src="{{ $producto->images->random()->url }}" class="rounded-circle" />  
+                        @endif
+                      </td>
                       <td>{{ $producto->nombre }}</td>
-                      <td>{{ $producto->slug }}</td>
-                      <td>{{ $producto->cantidad }}</td>
-                      <td>
-                          <span class="tag tag-success">{{ $producto->precio_actual }}</span>
-                        </td>
-                      <td>{{ $producto->descripcion_corta }}</td>                        
+                      <td>{{ $producto->estado }}</td>
+                      <td>{{ $producto->activo }}</td>
+                      <td>{{ $producto->slideprincipal }}</td>                        
                       <td>
                           <a class="btn btn-default" 
                               href="{{ route('admin.product.show',$producto->slug) }}">

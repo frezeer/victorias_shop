@@ -8,6 +8,7 @@
 <li class="breadcrumb-item active">@yield('titulo')</li>
 @endsection
 
+<script src="/adminlte/ckeditor/ckeditor.js"></script>
 @section('contenido')
 <div id="apiproduct">
 
@@ -224,7 +225,7 @@
               <div class="form-group">
                 <label>Descripción corta:</label>
 
-                <textarea class="form-control" name="descripcion_corta" id="descripcion_corta" 
+                <textarea class="form-control ckeditor" name="descripcion_corta" id="descripcion_corta" 
                 rows="3">{{ old('descripcion_corta') }}</textarea>
 
               </div>
@@ -233,7 +234,7 @@
               <div class="form-group">
                 <label>Descripción larga:</label>
 
-                <textarea class="form-control" name="descripcion_larga" id="descripcion_larga"
+                <textarea class="form-control ckeditor" name="descripcion_larga" id="descripcion_larga"
                  rows="5">{{ old('descripcion_larga') }}</textarea>
 
               </div>
@@ -259,7 +260,7 @@
               <div class="form-group">
                 <label>Especificaciones:</label>
 
-                <textarea class="form-control" name="especificaciones" id="especificaciones" 
+                <textarea class="form-control ckeditor" name="especificaciones" id="especificaciones" 
                 rows="3">{{ old('especificaciones') }}</textarea>
 
               </div>
@@ -268,7 +269,7 @@
               <div class="form-group">
                 <label>Datos de interes:</label>
 
-                <textarea class="form-control" name="datos_interes" id="datos_interes" 
+                <textarea class="form-control ckeditor" name="datos_interes" id="datos_interes" 
                 rows="5">{{ old('datos_interes') }}</textarea>
 
               </div>

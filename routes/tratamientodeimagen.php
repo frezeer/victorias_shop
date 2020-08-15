@@ -386,3 +386,10 @@ Route::get('/returnimageurl', function () {
         </div>
       </div--->
       <!-- /.card -->
+
+      
+    {{ $productos[1] }}<br />
+  
+    {{ $productos[1]->category }}<br />
+    
+    {{ $productos[1]->images }}
