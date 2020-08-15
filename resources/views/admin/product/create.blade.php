@@ -118,6 +118,10 @@
 
 
 
+
+
+
+    <div  class="container">         
       <div class="card card-success">
         <div class="card-header">
           <h3 class="card-title">Sección de Precios</h3>
@@ -132,9 +136,10 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">$</span>
                   </div>
-                  <input class="form-control" 
-                  type="number" id="precioanterior" name="precio_anterior" min="0" value="0" step=".01"
-                  value={{ old('precio_anterior') }} >
+                  <input 
+                  class="form-control" 
+                  v-model="precio_anterior"
+                  type="number" id="precio_anterior" name="precio_anterior" min="0" value="0" step=".01" >
 
                 </div>
               </div>
@@ -150,33 +155,40 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">$</span>
                   </div>
-                  <input class="form-control" type="number" id="precio_actual" name="precio_actual" min="0" value="0" step=".01" >
+                  <input
+                   v-model="precio_actual" 
+                  class="form-control" 
+                  type="number" id="precio_actual" name="precio_actual" min="0" value="0" step=".01" >
                 </div>
 
                 <br>
-                <span id="descuento"></span>
+                <span id="descuento">
+                    @{{ generarDescuentos }}
+                </span>
               </div>
               <!-- /.form-group -->
-
             </div>
             <!-- /.col -->
-
-
-
 
             <div class="col-md-6">
               <div class="form-group">
                 <label>Porcentaje de descuento</label>
                 <div class="input-group">
-                  <input class="form-control" type="number" id="porcentaje_descuento" name="porcentaje_descuento" step="any" min="0" min="100" value="0" >
+                  <input 
+                  v-model="porcentaje_descuento"
+                  class="form-control" type="number" id="porcentaje_descuento" name="porcentaje_descuento"
+                   step="any" min="0" max="100" value="0" >
                   <div class="input-group-prepend">
                     <span class="input-group-text">%</span>
                   </div>
                 </div>
-
-                <br>
+                <br />
                 <div class="progress">
-                  <div id="barraprogreso" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                  <div id="barraprogreso" class="progress-bar" role="progressbar" 
+                    v-bind:style="{width: porcentaje_descuento +'%'}" 
+                   aria-valuenow="0" aria-valuemin="0"
+                   aria-valuemax="100">
+                   @{{ porcentaje_descuento }}%</div>
                 </div>
               </div>
               <!-- /.form-group -->
@@ -187,10 +199,18 @@
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
-
         </div>
       </div>
       <!-- /.card -->
+   </div>
+
+
+
+
+
+
+
+
 
       <div class="row">
         <div class="col-md-6">
@@ -252,43 +272,35 @@
                 rows="5">{{ old('datos_interes') }}</textarea>
 
               </div>
-
             </div>
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
-
         </div>
         <!-- /.col-md-6 -->
-
-
 
       </div>
       <!-- /.row -->
 
-
-
-
       <div class="card card-warning">
         <div class="card-header">
           <h3 class="card-title">Imagenes</h3>
-
-
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-
           <div class="form-group">
-
-            <label for="archivosimagenes">Subir varias imagenes</label>
-
-            <input type="file" class="form-control-file" id="archivosimagenes[]" multiple accept="image/*">
+            <label for="imagenes">Añadir imagenes</label>
+            <input type="file" class="form-control-file" name="imagenes[]" id="imagenes[]"  multiple accept="image/*">
+            <div>
+               <br />
+               Limite de 2048MB por Imagen
+               <br />
+               <br />
+               Tipos Permitidos : jpeg ,gif , png , jpg , svg.
+               <br /> 
+            </div>
           </div>
-
-
         </div>
-
-
         <!-- /.card-body -->
         <div class="card-footer">
 
@@ -303,18 +315,13 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-
                 <label>Estado</label>
                 <input class="form-control" type="text" id="estado" name="estado" value="Nuevo">
-
-
               </div>
               <!-- /.form-group -->
-
             </div>
             <!-- /.col -->
             <div class="col-sm-6">
@@ -358,15 +365,11 @@
           </div>
           <!-- /.row -->
         </div>
-
         <!-- /.card-body -->
         <div class="card-footer">
-
         </div>
       </div>
       <!-- /.card -->
-
-
     </div><!-- /.container-fluid -->
   </section>
   <!-- /.content -->

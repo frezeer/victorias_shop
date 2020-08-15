@@ -15,6 +15,90 @@ use App\Product;
 use App\Image;
 
 
+//$producto = App\Product::find(1);
+//$imagen = $producto->images;
+//$categoria = $producto->category;
+
+//eliminar una imagen que pertenece a un producto
+////http://localhost:8000/productos-eliminar-imagen
+Route::get('/productos-eliminar-imagen/todos', function () {
+
+        $productos = App\Product::find(8);
+           $productos->images()->delete();
+            return $productos;
+});
+
+
+//eliminar una imagen que pertenece a un producto
+////http://localhost:8000/productos-eliminar-imagen
+Route::get('/productos-eliminar-imagen/4', function () {
+
+    $productos = App\Product::find(4);
+       $productos->images[0]->delete();
+       return $productos;
+});
+
+
+//me trae todos los productos y sus imagenes en arreglo
+////http://localhost:8000/productos-imagenes-categorias
+Route::get('/productos-imagenes-categorias', function () {
+
+    $productos = App\Product::with('images','category')->get();
+      return $productos;
+});
+
+//me trae todos los productos y sus imagenes en arreglo
+////http://localhost:8000/productos-imagenes-categorias-4
+Route::get('/productos-imagenes-categorias/4/', function () {
+
+    $productos = App\Product::with('images','category')->find(4);
+      return $productos;
+});
+
+
+//me trae todos los productos  sus imagenes y su categoria en arreglo delimiatdo por 
+// los campos que me interesan
+////http://localhost:8000/productos-imagenes-categorias-5
+
+Route::get('/productos-imagenes-categorias-6', function () {
+    $productos = App\Product::with('images:id,imageable_id,url','category:id,nombre')->find(4);
+            return ($productos);
+});
+
+//me trae todos los productos  sus imagenes y su categoria en arreglo
+////http://localhost:8000/productos-imagenes-categorias-5
+
+Route::get('/productos-imagenes-categorias-5', function () {
+
+    $productos = App\Product::with('images','category')->find(4);
+    $categoria_nombre = $productos->category->nombre;
+    $imagen_nombre    = $productos->images[2]->url;
+    return ($categoria_nombre.','.$imagen_nombre);
+});
+
+//me trae todos los productos y sus imagenes en arreglo
+////http://localhost:8000/productos-imagenes 
+Route::get('/productos-imagenes', function () {
+
+    $productos = App\Product::with('images')->get();
+      return $productos;
+});
+
+//me trae el producto con id 4 y sus imagenes
+////http://localhost:8000/productos
+Route::get('/productos4', function () {
+
+    $productos = App\Product::with('images')->find(4);
+      return $productos;
+});
+
+//me trae el producto con id 4 y sus imagenes accediendo al objeto
+////http://localhost:8000/productos
+Route::get('/productos-images', function () {
+
+    $productos = App\Product::with('images')->find(4);
+      return $productos->images[2]->url;
+});
 
 
 

@@ -51,13 +51,38 @@ class AdminProductController extends Controller
     public function store(Request $request)
     {
          $request->validate([
-            'nombre'      =>       'required|max:50|unique:categories,nombre',
-            'slug'        =>       'required|max:50|unique:categories,slug',
-            'cantidad'    =>       'required',
-            'estado'       =>       'required',
-            'descripcion_corta' => 'required|max:20',
-            'descripcion_larga' => 'required|max:100',
+
+            'nombre'        =>       'required|max:50|unique:products,nombre',
+            'slug'          =>       'required|max:50|unique:products,slug',
+            'category_id'   =>       'required',
+            'imagenes.*'    =>       'image|mimes:jpeg,gif,png,jpg,svg|max:2048',
+            'precio_actual' =>       'required',
+            'cantidad'      =>       'required',
+            'estado'        =>       'required',
+            'descripcion_corta' =>   'required|max:20',
+            'descripcion_larga' =>   'required|max:100'
+
              ]);
+
+             $urlimagenes = [];
+
+            if($request->hasFile('imagenes'))
+            {
+                $imagenes = $request->file('imagenes');
+                //dd($imagenes);
+                foreach ($imagenes as $imagen){
+
+                    $nombre = time().'_'.$imagen->getClientOriginalName();
+
+                    $ruta = public_path().'/imagenes';
+                    
+                    $imagen->move($ruta, $nombre);
+                    
+                    $urlimagenes[]['url'] = '/imagenes/'.$nombre;
+
+                }
+               //return $urlimagenes;
+            }
 
             $prod = new Product();            
             $prod->nombre               = $request->nombre;
@@ -71,24 +96,33 @@ class AdminProductController extends Controller
             $prod->datos_interes        = $request->datos_interes;
             $prod->especificaciones     = $request->especificaciones;
             $prod->estado               = $request->estado;    
-            //$prod->activo               = $request->activo;
-            //$prod->slideprincipal       = $request->slideprincipal;
+            
+            
 
-            if($request->activo){
+            if($request->activo)
+            {
                 $prod->activo = "Si";
-            }else{
+                }else{
                  $prod->activo = "No";
             }  
             
-             if($request->slideprincipal){
+                if($request->slideprincipal)
+                {
                 $prod->slideprincipal = "Si";
-            }else{
+                }
+                else
+                {
                  $prod->slideprincipal = "No";
-            } 
-             $prod->save();
+                } 
+            
+            
+            $prod->save();
 
-            //return Product::create($request->all());
-            return redirect()->route('admin.product.index')->with('datos','Producto creado correctamente');
+            $prod->images()->createMany($urlimagenes);
+
+            //return $prod->images;
+        //return Product::create($request->all());
+         return redirect()->route('admin.product.index')->with('datos','Producto creado correctamente');
     }
 
     /**
