@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('cantidad')->unsigned()->default(0);
             $table->decimal('precio_actual' ,12,2)->default(0);
+            $table->decimal('precio_anterior',12,2)->default(0);
             $table->integer('porcentaje_descuento')->default(0);
             $table->text('descripcion_corta')->nullable();
             $table->text('descripcion_larga')->nullable();

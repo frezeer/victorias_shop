@@ -1,6 +1,6 @@
 @extends('plantillas.admin')
 
-@section('titulo', 'Crear Producto')
+@section('titulo', 'Editar Producto')
 
 @section('breadcrumb')
 <li class="breadcrumb-item"><a href="{{ route('admin') }}">Inicio</a></li>
@@ -9,7 +9,7 @@
 @endsection
 
 @section('estilos')
-<!-- Select2 -->
+ <!-- Select2 -->
 <link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
 <link rel="stylesheet" href="/adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 <!-- Ekko Lightbox -->
@@ -43,24 +43,24 @@
       });
     });
  }) 
-</script>
+</script>    
 @endsection
-
+<!-- ckEditor -->
 <script src="/adminlte/ckeditor/ckeditor.js"></script>
 
 <script>
  window.data = {
     editar:'Si',
     datos:{
-        "nombre":"{{ $producto->nombre }}",
-        "precio_anterior":"{{ $producto->precio_anterior }}",
-        "porcentaje_descuento":"{{ $producto->porcentaje_descuento }}"
+        "nombre":"Hombre",
+        "precio_anterior":"100",
+        "porcentaje_descuento":"50"
       }
   }
 </script>
 
-
 @section('contenido')
+
 <div id="apiproduct">
 
 <form action="{{ route('admin.product.store') }}" method="POST" enctype="multipart/form-data">
@@ -80,7 +80,8 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label>Visitas</label>
-                <input readonly  class="form-control" type="number" id="visitas" name="visitas">
+                <input readonly  class="form-control" type="number" id="visitas" name="visitas"
+                readonly value="{{ $producto->visitas }}">
               </div>
               <!-- /.form-group -->
 
@@ -90,7 +91,8 @@
               <div class="form-group">
 
                 <label>Ventas</label>
-                <input readonly class="form-control" type="number" id="ventas" name="ventas">
+                <input readonly class="form-control" type="number" id="ventas" name="ventas"
+                readonly value="{{ $producto->ventas }}" >
               </div>
               <!-- /.form-group -->
             </div>
@@ -120,7 +122,7 @@
                 <input v-model="nombre"
                     @blur= "getProduct"
                     @focus="div_aparecer=false"
-                    class="form-control" type="text" id="nombre" name="nombre">
+                    class="form-control" type="text" id="nombre" name="nombre" >
 
                 <label>Slug</label>
                 <input readonly v-model="generarSlug" 
@@ -141,18 +143,15 @@
                 <label>Categorias</label>
                 <select name="category_id" id="category_id" class="form-control" style="width: 100%;">
                   @foreach($categorias as $categoria)
-                  @if ($producto->category->id == $categoria->id )
+                  @if ($categoria->id == $producto->category->id)
                   <option value="{{ $categoria->id }}" selected="selected">{{ $categoria->nombre }}</option>
                   @else
                   <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
                   @endif
                   @endforeach
                 </select>
-
                 <label>Cantidad</label>
-                <input class="form-control"
-                 type="number" id="cantidad" name="cantidad" 
-                 value="{{ $producto->cantidad }}" />
+                <input class="form-control" type="number" id="cantidad" name="cantidad" value="{{ $producto->cantidad }}" >
               </div>
               <!-- /.form-group -->
             </div>
@@ -169,10 +168,6 @@
       </div>
 
       <!-- /.card -->
-
-
-
-
 
 
     <div  class="container">         
@@ -193,7 +188,8 @@
                   <input 
                   class="form-control" 
                   v-model="precio_anterior"
-                  type="number" id="precio_anterior" name="precio_anterior" min="0" value="0" step=".01" >
+                  type="number" id="precio_anterior" name="precio_anterior" min="0" value="0" step=".01"
+                   >
 
                 </div>
               </div>
@@ -212,7 +208,8 @@
                   <input
                    v-model="precio_actual" 
                   class="form-control" 
-                  type="number" id="precio_actual" name="precio_actual" min="0" value="0" step=".01" >
+                  type="number" id="precio_actual" name="precio_actual" min="0" value="0" step=".01"
+                   >
                 </div>
 
                 <br>
@@ -231,7 +228,7 @@
                   <input 
                   v-model="porcentaje_descuento"
                   class="form-control" type="number" id="porcentaje_descuento" name="porcentaje_descuento"
-                   step="any" min="0" max="100" value="0" >
+                   step="any" min="0" max="100"  >
                   <div class="input-group-prepend">
                     <span class="input-group-text">%</span>
                   </div>
@@ -258,6 +255,8 @@
       <!-- /.card -->
    </div>
 
+
+
       <div class="row">
         <div class="col-md-6">
 
@@ -269,21 +268,15 @@
               <!-- Date dd/mm/yyyy -->
               <div class="form-group">
                 <label>Descripción corta:</label>
-
                 <textarea class="form-control ckeditor" name="descripcion_corta" id="descripcion_corta" 
                 rows="3">{{ $producto->descripcion_corta }}</textarea>
-
               </div>
               <!-- /.form group -->
-
               <div class="form-group">
                 <label>Descripción larga:</label>
-
                 <textarea class="form-control ckeditor" name="descripcion_larga" id="descripcion_larga"
                  rows="5">{{ $producto->descripcion_larga }}</textarea>
-
               </div>
-
             </div>
             <!-- /.card-body -->
           </div>
@@ -293,9 +286,7 @@
 
 
 
-
         <div class="col-md-6">
-
           <div class="card card-info">
             <div class="card-header">
               <h3 class="card-title">Especificaciones y otros datos</h3>
@@ -304,19 +295,14 @@
               <!-- Date dd/mm/yyyy -->
               <div class="form-group">
                 <label>Especificaciones:</label>
-
                 <textarea class="form-control ckeditor" name="especificaciones" id="especificaciones" 
                 rows="3">{{ $producto->especificaciones }}</textarea>
-
               </div>
               <!-- /.form group -->
-
               <div class="form-group">
                 <label>Datos de interes:</label>
-
                 <textarea class="form-control ckeditor" name="datos_interes" id="datos_interes" 
                 rows="5">{{ $producto->datos_interes }}</textarea>
-
               </div>
             </div>
             <!-- /.card-body -->
@@ -324,7 +310,6 @@
           <!-- /.card -->
         </div>
         <!-- /.col-md-6 -->
-
       </div>
       <!-- /.row -->
 
@@ -349,15 +334,11 @@
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
-
-        </div>
+       </div>
       </div>
       <!-- /.card -->
-
-
-
-
-        <div class="card card-secondary">
+     
+      <div class="card card-secondary">
       <div class="card-header">
 
         <div class="card-title  text-center">
@@ -389,7 +370,6 @@
     </div>  
 
 
-
       <div class="card card-danger">
         <div class="card-header">
           <h3 class="card-title">Administración</h3>
@@ -400,7 +380,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label>Estado</label>
-                <input class="form-control" type="text" id="estado" name="estado" value="{{ $producto->estado }}">
+                <input class="form-control" type="text" id="estado" name="estado" value="Nuevo">
               </div>
               <!-- /.form-group -->
             </div>
@@ -409,11 +389,10 @@
               <!-- checkbox -->
               <div class="form-group clearfix">
                 <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" 
-                  id="activo" name="activo"
-                    @if($producto->activo = "Si")
+                  <input type="checkbox" class="custom-control-input" id="activo" name="activo"
+                    @if($producto->activo = "Si"){
                       checked
-                    @endif 
+                    @endif
                   >
                   <label class="custom-control-label" for="activo">{{ $producto->estado }}</label>
                 </div>
@@ -422,35 +401,28 @@
 
               <div class="form-group">
                 <div class="custom-control custom-switch">
-                  <input type="checkbox" class="custom-control-input" 
-                  id="slideprincipal" name="slideprincipal"
-                   @if($producto->slideprincipal = "Si")
+                  <input type="checkbox" class="custom-control-input" id="slideprincipal" name="slideprincipal"
+                   @if($producto->slideprincipal = "Si"){
                       checked
-                    @endif   
+                    @endif
                   >
                   <label class="custom-control-label" for="slideprincipal">Aparece en el Slider principal</label>
                 </div>
               </div>
-
             </div>
-
-
-
           </div>
+
+
           <!-- /.row -->
-          
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-
                 <a class="btn btn-danger" href="{{ route('cancelar','admin.product.index') }}">Cancelar</a>
                 <input
                 :disabled = "deshabilitar_boton==1" 
                 type="submit" value="Guardar" class="btn btn-primary">
-
               </div>
               <!-- /.form-group -->
-
             </div>
             <!-- /.col -->
           </div>

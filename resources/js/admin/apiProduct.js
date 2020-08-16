@@ -75,6 +75,9 @@ const apiproduct = new Vue({
             },
             methods:
             {
+                eliminarimagen(id){
+                  console.log(id);
+                },  
                 getProduct(){
                     if(this.slug){
                     let url = '/api/product/'+this.slug;
@@ -100,11 +103,14 @@ const apiproduct = new Vue({
             },
             mounted()
             {
-                if(document.getElementById('editar'))
+                if(data.editar=='Si')
                 {
-                    this.nombre =  document.getElementById('nombretemp').innerHTML;
-                    //console.log(this.nombre);
+                    this.nombre =  data.datos.nombre;
+                    this.precio_anterior = data.datos.precio_anterior;
+                    this.porcentaje_descuento = data.datos.porcentaje_descuento;
                     this.deshabilitar_boton=0;
                 }
+
+                console.log(data);
             }
         });

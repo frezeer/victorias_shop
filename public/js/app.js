@@ -49882,6 +49882,9 @@ var apiproduct = new Vue({
     }
   },
   methods: {
+    eliminarimagen: function eliminarimagen(id) {
+      console.log(id);
+    },
     getProduct: function getProduct() {
       var _this = this;
 
@@ -49910,11 +49913,14 @@ var apiproduct = new Vue({
     }
   },
   mounted: function mounted() {
-    if (document.getElementById('editar')) {
-      this.nombre = document.getElementById('nombretemp').innerHTML; //console.log(this.nombre);
-
+    if (data.editar == 'Si') {
+      this.nombre = data.datos.nombre;
+      this.precio_anterior = data.datos.precio_anterior;
+      this.porcentaje_descuento = data.datos.porcentaje_descuento;
       this.deshabilitar_boton = 0;
     }
+
+    console.log(data);
   }
 });
 

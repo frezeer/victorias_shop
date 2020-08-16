@@ -90,6 +90,7 @@ class AdminProductController extends Controller
             $prod->category_id          = $request->category_id;
             $prod->cantidad             = $request->cantidad;
             $prod->precio_actual        = $request->precio_actual;
+            $prod->precio_anterior      = $request->precio_anterior;
             $prod->porcentaje_descuento = $request->porcentaje_descuento;
             $prod->descripcion_corta    = $request->descripcion_corta;
             $prod->descripcion_larga    = $request->descripcion_larga;   

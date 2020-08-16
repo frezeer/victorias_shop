@@ -62,8 +62,8 @@ class AdminCategoryController extends Controller
 
            $request->validate([
             'nombre'      => 'required|max:50|unique:categories,nombre',
-            'slug'        =>  'required|max:2|unique:categories,slug',  
-            'descripcion' => 'required|max:2' ]);
+            'slug'        => 'required|max:50|unique:categories,slug',  
+            'descripcion' => 'required|max:50' ]);
 
         Category::create($request->all());
         return redirect()->route('admin.category.index')->with('datos','Registro crado correctamente');   
